@@ -29,6 +29,7 @@ open class Vehiculo(nombre: String,
 
 
     open var paradas: Int = 0
+    open var rondas: Int = 0
 
     companion object {
         // Constante que representa la cantidad de kilómetros que puede recorrer el vehículo por litro de combustible.

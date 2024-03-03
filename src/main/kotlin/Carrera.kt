@@ -40,7 +40,7 @@ fun Float.sinDecimales(): Float {
  */
 class Carrera(private val nombreCarrera: String,
               private val distanciaTotal: Float,
-              private val participantes: List<Vehiculo> = listOf(),
+              private val participantes: MutableList<Vehiculo> = mutableListOf(),
               private var estadoCarrera: Boolean) {
 
     private var historialAcciones: MutableMap<String, MutableList<String>> = mutableMapOf()
@@ -106,7 +106,10 @@ class Carrera(private val nombreCarrera: String,
         estadoCarrera = true
         println("¡Comienza la carrera!")
         while (estadoCarrera) {
-            val vehiculo = participantes.random()
+            var vehiculo = participantes.random()
+            while (vehiculo.kilometrosActuales >= distanciaTotal){ //Un bucle que impida coger un vehiculo que ya ha llegado a meta.
+                vehiculo = participantes.random()
+            }
             avanzarVehiculo(vehiculo)
             mostrarClasificacionParcial()
             determinarGanador()
@@ -129,8 +132,8 @@ class Carrera(private val nombreCarrera: String,
     private fun mostrarClasificacionFinal() {
         println("\n* Clasificación Final:\n")
         var posicion = 1
-        participantes.toList().sortedByDescending { it.kilometrosActuales }.forEach {
-            println("${posicion++} -> ${it.nombre} (${it.kilometrosActuales.redondeo(2)} kms)")
+        participantes.toList().sortedBy { it.rondas }.forEach {
+            println("${posicion++} -> ${it.nombre} (${it.kilometrosActuales.redondeo(2)} kms, ${it.rondas} rondas.)")
         }
         println()
     }
@@ -189,6 +192,7 @@ class Carrera(private val nombreCarrera: String,
             ajustarKm(vehiculo)
         }
         avanzarTramo(vehiculo, distanciaRestante)
+        vehiculo.rondas++
     }
 
     /**
@@ -267,6 +271,22 @@ class Carrera(private val nombreCarrera: String,
             }
         }
     }
+
+    // Intento hallar una forma de determinar cuando han llegado todos a meta.
+    /*val listaClasificacion = mutableSetOf<Vehiculo>()
+    fun determinarGanador() {
+        for (vehiculo in participantes) {
+            if (vehiculo.kilometrosActuales >= distanciaTotal) {
+                listaClasificacion.add(participantes[participantes.indexOf(vehiculo)])
+            }
+            if (listaClasificacion.size == participantes.size) {
+                println("\n¡Carrera finalizada!")
+                estadoCarrera = false
+                break
+            }
+        }
+    }*/
+
 
 
     /**

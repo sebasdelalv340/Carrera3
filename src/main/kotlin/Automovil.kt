@@ -25,6 +25,7 @@ open class Automovil(nombre: String,
     override var capacidadCombustible: Float = capacidadCombustible.sinDecimales()
     override var combustibleActual: Float = combustibleActual.redondeo(2)
     override var paradas: Int = 0
+    override var rondas: Int = 0
 
     companion object{
         // Constantes para el cálculo de la autonomía y el derrape.

@@ -30,6 +30,7 @@ open class Motocicleta(nombre: String,
     ): Vehiculo(nombre, marca, modelo, capacidadCombustible, combustibleActual, kilometrosActuales) {
 
     override var paradas: Int = 0
+    override var rondas: Int = 0
 
 
     companion object{

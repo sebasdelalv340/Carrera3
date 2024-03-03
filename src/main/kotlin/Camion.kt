@@ -10,6 +10,7 @@ class Camion(nombre: String,
     override var combustibleActual: Float = combustibleActual.redondeo(2)
 
     override var paradas: Int = 0
+    override var rondas: Int = 0
 
     init {
         require(capacidadCombustible in 90f..150f) {"La capacidad debe ser un valor entre 90 y 150 litros."}

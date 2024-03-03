@@ -10,8 +10,14 @@ fun main() {
 
     val listaVehiculos: MutableList<Vehiculo> = mutableListOf()
 
-    print("Introduce el número de participantes: ")
-    val numParticipantes = readln().toInt()
+    var numParticipantes = 0
+
+    try {
+        print("Introduce el número de participantes: ")
+        numParticipantes = readln().toInt()
+    } catch (e: NumberFormatException) {
+        println("*Error* - Por favor ingrese un número válido.")
+    }
 
     /**
      * Registra un vehículo de forma aleatoria por cada nombre introducido, lo añade a una lista y muestra los datos de cada vehículo.

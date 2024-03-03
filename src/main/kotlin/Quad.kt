@@ -16,6 +16,7 @@ class Quad(nombre: String,
     val tipo: TipoQuad = TipoQuad.entries.toTypedArray().random()
 
     override var paradas: Int = 0
+    override var rondas: Int = 0
 
     companion object{
         // La cantidad de kilómetros que puede recorrer la motocicleta por litro de combustible.
