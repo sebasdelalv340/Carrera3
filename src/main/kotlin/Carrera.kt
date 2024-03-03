@@ -132,7 +132,7 @@ class Carrera(private val nombreCarrera: String,
     private fun mostrarClasificacionFinal() {
         println("\n* Clasificación Final:\n")
         var posicion = 1
-        participantes.toList().sortedBy { it.rondas }.forEach {
+        participantes.toList().sortedByDescending { it.kilometrosActuales }.forEach {// Si todos llegaran a meta, la clasificación sería por rondas.
             println("${posicion++} -> ${it.nombre} (${it.kilometrosActuales.redondeo(2)} kms, ${it.rondas} rondas.)")
         }
         println()
